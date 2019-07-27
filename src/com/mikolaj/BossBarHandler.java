@@ -9,19 +9,18 @@ import org.bukkit.Bukkit;
 public class BossBarHandler {
 	private final BossBar bar;
 	
-	public BossBarHandler() {
+	public BossBarHandler(Player player) {
 		this.bar = Bukkit.createBossBar("Distance to monument", BarColor.GREEN, BarStyle.SOLID);
-	}
-	
-	public void addPlayer(Player player) {
 		this.bar.addPlayer(player);
 	}
 	
-	public void removePlayers() {
+	public void removePlayer() {
 		this.bar.removeAll();
 	}
 	
 	public void updateDistance(double distance) {
-		this.bar.setProgress(distance / 10000.0);
+		// This formula fits any positive real number (distance) into <0, 1>
+		double progress = 1.0 - Math.tanh(distance / 10000.0);
+		this.bar.setProgress(progress);
 	}
 }

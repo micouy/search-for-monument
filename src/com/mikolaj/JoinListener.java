@@ -37,6 +37,7 @@ public class JoinListener implements Listener {
 	}
 	
 	public void cancelDistanceTask() {
+		this.task.removeBossBar();
 		this.task.cancel();
 		this.plugin.getLogger().info("Canceled tracking distance");
 	}

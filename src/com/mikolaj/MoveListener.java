@@ -5,7 +5,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 
 public class MoveListener implements Listener {
-	private double routeLength = 0;
+	private double routeLength;
+	
+	public MoveListener() {
+		this.routeLength = 0;
+	}
 	
 	@EventHandler
     public void onMove(PlayerMoveEvent event) {
