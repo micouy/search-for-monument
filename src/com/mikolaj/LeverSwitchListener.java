@@ -8,11 +8,9 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 public class LeverSwitchListener implements Listener {
-	private boolean hasBeenUsed;
 	private SearchForMonumentPlugin plugin;
 	
 	public LeverSwitchListener(SearchForMonumentPlugin plugin) {
-		this.hasBeenUsed = false;
 		this.plugin = plugin;
 	}
 
@@ -20,9 +18,6 @@ public class LeverSwitchListener implements Listener {
     public void onLeverSwitch(PlayerInteractEvent event) {
 		Location location = event.getClickedBlock().getLocation();
 		Material material = event.getClickedBlock().getType();
-		
-		if (this.hasBeenUsed)
-			return;
 		
 		if (material != Material.LEVER)
 			return;
@@ -34,8 +29,7 @@ public class LeverSwitchListener implements Listener {
 			|| location.getY() == 71
 			|| location.getZ() == 1))
 			return;
-		
-		this.hasBeenUsed = true;
+
 		this.plugin.startSearch(event.getPlayer());
     }
 }
