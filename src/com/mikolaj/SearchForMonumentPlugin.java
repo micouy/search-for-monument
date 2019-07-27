@@ -10,11 +10,13 @@ public class SearchForMonumentPlugin extends JavaPlugin {
     public void onEnable() {
 		this.getCommand("startsearch").setExecutor(new StartSearchCommand(this));
         getServer().getPluginManager().registerEvents(new BreakSpawnListener(), this);
-    }
+        getServer().getPluginManager().registerEvents(new LeverSwitchListener(this), this);
+	}
 	  
     public void startSearch(Player player) {
 		this.task = new CalcDistanceTask(player);
         this.task.runTaskTimer(this, 0L, 60L);
+        new InventoryHandler().equipPlayer(player);
 
 		getLogger().info("Started tracking movement");
         getServer().getPluginManager().registerEvents(new MoveListener(), this);
