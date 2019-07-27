@@ -25,7 +25,7 @@ public class StartSearchCommand implements CommandExecutor {
     		return false;
     	}
 
-    	this.plugin.startTrackingMovement(player);
+    	this.plugin.startSearch(player);
     	new InventoryHandler().equipPlayer(player);
     	
         return true;
