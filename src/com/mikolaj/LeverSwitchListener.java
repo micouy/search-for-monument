@@ -3,12 +3,16 @@ package com.mikolaj;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.block.data.Openable;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
 
 public class LeverSwitchListener implements Listener {
-	private SearchForMonumentPlugin plugin;
+	private final SearchForMonumentPlugin plugin;
 	
 	public LeverSwitchListener(SearchForMonumentPlugin plugin) {
 		this.plugin = plugin;
@@ -30,6 +34,21 @@ public class LeverSwitchListener implements Listener {
 			|| location.getZ() == 1))
 			return;
 
+		openDoor(event.getPlayer());
 		this.plugin.startSearch(event.getPlayer());
     }
+	
+	private void openDoor(Player player) {
+		Block door = player.getLocation().getWorld().getBlockAt(0, 71, -2);
+		
+		if (door.getType() != Material.IRON_DOOR)
+			return;
+		
+		BlockData blockData = door.getBlockData();
+
+		if (blockData instanceof Openable) {
+			((Openable) blockData).setOpen(true);
+			door.setBlockData(blockData);
+		}		
+	}
 }

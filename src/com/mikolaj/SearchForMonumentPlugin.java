@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class SearchForMonumentPlugin extends JavaPlugin {
     private CalcDistanceTask task;
     private LeverSwitchListener leverListener;
+    private MoveListener moveListener;
 
 	@Override
     public void onEnable() {
@@ -21,12 +22,20 @@ public class SearchForMonumentPlugin extends JavaPlugin {
     	// Stop listening for lever switch
     	HandlerList.unregisterAll(this.leverListener);
     	
-		this.task = new CalcDistanceTask(player);
+		this.task = new CalcDistanceTask(this, player);
         this.task.runTaskTimer(this, 0L, 60L);
         new InventoryHandler().equipPlayer(player);
         
 
 		getLogger().info("Started tracking movement");
-        getServer().getPluginManager().registerEvents(new MoveListener(player), this);
+		this.moveListener = new MoveListener(player);
+        getServer().getPluginManager().registerEvents(this.moveListener, this);
 	}
+    
+    public void stopSearch(Player player) {
+    	this.task.removeBossBar();
+    	this.task.cancel();
+    	HandlerList.unregisterAll(this.moveListener);
+    	player.sendMessage("Congratulations! You've finished the quest.");
+    }
 }
