@@ -3,12 +3,7 @@ bin/
 
 **/.DS_Store
 **/*.log
-
 **/*.jar
-
-!lib/*.jar
-!plugin/*.jar
-
 **/*.class
 **/*.war
 **/*.nar
@@ -16,3 +11,7 @@ bin/
 **/*.zip
 **/*.tar.gz
 **/*.rar
+
+!lib/*.jar
+!plugin/*.jar
+!world.zip
