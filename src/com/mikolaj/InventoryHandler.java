@@ -16,17 +16,19 @@ public class InventoryHandler {
 
 	public void equipPlayer(Player player) {
 		PlayerInventory inventory = player.getInventory();
-		inventory.clear();
-
 		setArmor(inventory);
 		giveSword(inventory);
 		giveFood(inventory);
 	}
 	
+	public void clearInventory(Player player) {
+		PlayerInventory inventory = player.getInventory();
+		inventory.clear();
+	}
+	
 	private void giveFood(PlayerInventory inventory) {
 		ItemStack jerky = new ItemStack(Material.COOKED_BEEF, 3);
 		
-		// Set meta
 		ItemMeta meta = jerky.getItemMeta();
 		meta.setDisplayName("Jerky");
 		jerky.setItemMeta(meta);

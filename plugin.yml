@@ -1,8 +1,5 @@
 name: SearchForMonument
-main: com.mikolaj.SearchForMonumentPlugin
+main: com.mikolaj.MyPlugin
 version: 1.0
-api-version: 1.13
+api-version: 1.14
 commands:
-  startsearch:
-    description: Start the quest
-    usage: /startsearch <player>

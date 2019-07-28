@@ -4,12 +4,17 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class CalcDistanceTask extends BukkitRunnable {
-	private final SearchForMonumentPlugin plugin;
+	private final MyPlugin plugin;
     private final Player player;
 	private final BossBarHandler bossBar;
 
+	// TODO get location from config
+	private final static int monumentX = -3494;
+	private final static int monumentY = 71;
+	private final static int monumentZ = 942;
 
-    public CalcDistanceTask(SearchForMonumentPlugin plugin, Player player) {
+
+    public CalcDistanceTask(MyPlugin plugin, Player player) {
     	this.plugin = plugin;
     	this.player = player;
         this.bossBar = new BossBarHandler(player);
@@ -21,8 +26,8 @@ public class CalcDistanceTask extends BukkitRunnable {
     	this.bossBar.updateDistance(distance);
     	this.player.sendMessage(Integer.toString(distance));
 
-    	if (distance < 2) {
-    		this.plugin.stopSearch(this.player);
+    	if (distance < 5) {
+    		this.plugin.finishSearch(this.player);
     	}
     }
     
@@ -32,6 +37,11 @@ public class CalcDistanceTask extends BukkitRunnable {
     
     private int calcDistance() {
     	// TODO get Monument's position from config
-    	return (int) Math.round(this.player.getLocation().subtract(-3494, 71, 942).length());
+    	return (int) Math.round(
+    		this.player
+	    		.getLocation()
+	    		.subtract(monumentX, monumentY, monumentZ)
+	    		.length()
+    	);
     }
 }
