@@ -25,7 +25,7 @@ public class MoveListener implements Listener {
 		this.routeLength += moveLength;
     }
 	
-	public int gtRouteLength() {
+	public int getRouteLength() {
 		return (int) Math.round(this.routeLength);
 	}
 }

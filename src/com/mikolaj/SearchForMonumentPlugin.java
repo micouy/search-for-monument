@@ -36,6 +36,6 @@ public class SearchForMonumentPlugin extends JavaPlugin {
     	this.task.removeBossBar();
     	this.task.cancel();
     	HandlerList.unregisterAll(this.moveListener);
-    	player.sendMessage("Congratulations! You've finished the quest.");
+    	player.sendMessage("Congratulations! You've travelled " + Integer.toString(this.moveListener.getRouteLength()) + "m.");
     }
 }
