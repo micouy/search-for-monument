@@ -20,7 +20,7 @@ public class BossBarHandler {
 	
 	public void updateDistance(double distance) {
 		// This formula fits any positive real number (distance) into <0, 1>
-		double progress = 1.0 - Math.tanh(distance / 10000.0);
+		double progress = 2.0 - (2.0 / (1.0 + Math.exp(-distance / 2000.0)));
 		this.bar.setProgress(progress);
 	}
 }

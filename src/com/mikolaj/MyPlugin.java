@@ -30,6 +30,7 @@ public class MyPlugin extends JavaPlugin {
 	
 	public void tpPlayerToSpawn(Player player) {
 		Location location = player.getLocation();
+		// TODO get location from config
 		location.setX(0);
 		location.setY(70);
 		location.setZ(0);
@@ -40,7 +41,8 @@ public class MyPlugin extends JavaPlugin {
 		this.moveListener = new MoveListener(player);
 		getServer().getPluginManager().registerEvents(this.moveListener, this); 
 		this.task = new CalcDistanceTask(this, player);
-        this.task.runTaskTimer(this, 0L, 60L);
+		// 1 minute = 60 seconds * 20 ticks
+        this.task.runTaskTimer(this, 0, 60 * 20);
 	}
 	
 	private void stopMovementTracking() {

@@ -24,7 +24,6 @@ public class CalcDistanceTask extends BukkitRunnable {
     public void run() {
     	int distance = calcDistance();
     	this.bossBar.updateDistance(distance);
-    	this.player.sendMessage(Integer.toString(distance));
 
     	if (distance < 5) {
     		this.plugin.finishSearch(this.player);
